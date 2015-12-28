@@ -10,6 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private NavigationView menu;
@@ -28,11 +31,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout = (TabLayout) findViewById(R.id.table_content);
         pager = (ViewPager) findViewById(R.id.pager);
 
-
-
         toggle = new ActionBarDrawerToggle(this, drawer, 0, 0);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawer.setDrawerListener(toggle);
+
+        List<String> titleList = new LinkedList<String>();
+        titleList.add("");
 
         menu.setNavigationItemSelectedListener(this);
         toggle.syncState();
