@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-    <item android:id="@+id/item_home"
-        android:title="首页"
-        android:icon="@mipmap/ic_menu_home"/>
-    <item android:id="@+id/item_settings"
-        android:icon="@mipmap/ic_menu_manage"
-        android:title="设置"/>
-    <item android:id="@+id/item_function"
-        android:title="功能"
-        android:icon="@mipmap/ic_menu_cut"/>
+        <item
+            android:id="@+id/item_happen"
+            android:icon="@mipmap/ic_menu_home"
+            android:title="糗事" />
+        <item
+            android:id="@+id/item_group"
+            android:icon="@mipmap/ic_menu_manage"
+            android:title="糗友圈" />
+        <item
+            android:id="@+id/item_discovery"
+            android:icon="@mipmap/ic_menu_cut"
+            android:title="发现" />
+        <item android:id="@+id/item_note"
+            android:title="小纸条"/>
     </group>
+        <item android:id="@+id/item_self"
+            android:title="我"/>
 
 </menu>
