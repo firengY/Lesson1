@@ -13,10 +13,17 @@
             android:id="@+id/item_discovery"
             android:icon="@mipmap/ic_menu_cut"
             android:title="发现" />
-        <item android:id="@+id/item_note"
-            android:title="小纸条"/>
+        <item
+            android:id="@+id/item_note"
+            android:title="小纸条" />
     </group>
-        <item android:id="@+id/item_self"
-            android:title="我"/>
+    <item android:title="我">
+        <menu>
+            <item android:id="@+id/subitem_setting"
+                android:title="设置"/>
+            <item android:id="@+id/subitem_quit"
+                android:title="退出"/>
+        </menu>
+    </item>
 
 </menu>

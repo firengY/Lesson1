@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start|left"
         app:menu="@menu/menu_first_project"
-        app:header=""/>
+        app:headerLayout="@layout/header_first_project"/>
 
     <FrameLayout
         android:layout_width="match_parent"
