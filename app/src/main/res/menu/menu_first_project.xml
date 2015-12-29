@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+    <group>
         <item
-            android:id="@+id/item_happen"
-            android:icon="@mipmap/ic_menu_home"
-            android:title="糗事" />
+            android:id="@+id/item_qiushi"
+            android:checked="true"
+            android:icon="@drawable/ic_qiushi"
+            android:title="糗事"
+            android:checkable="true"/>
         <item
-            android:id="@+id/item_group"
-            android:icon="@mipmap/ic_menu_manage"
+            android:checkable="true"
+            android:id="@+id/item_qiuyoucircle"
+            android:icon="@drawable/ic_qiuyoucircle"
             android:title="糗友圈" />
         <item
-            android:id="@+id/item_discovery"
-            android:icon="@mipmap/ic_menu_cut"
+            android:checkable="true"
+            android:id="@+id/item_nearby"
+            android:icon="@drawable/ic_nearby"
             android:title="发现" />
         <item
-            android:id="@+id/item_note"
+            android:checkable="true"
+            android:id="@+id/item_message"
+            android:icon="@drawable/ic_message"
             android:title="小纸条" />
     </group>
-    <item android:title="我">
+    <item android:title="我"
+        android:icon="@drawable/ic_mine">
         <menu>
-            <item android:id="@+id/subitem_setting"
-                android:title="设置"/>
-            <item android:id="@+id/subitem_quit"
-                android:title="退出"/>
+            <item
+                android:checkable="true"
+                android:id="@+id/subitem_setting"
+                android:title="设置" />
+            <item
+                android:checkable="true"
+                android:id="@+id/subitem_quit"
+                android:title="退出" />
         </menu>
     </item>
 

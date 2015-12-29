@@ -22,6 +22,12 @@ public class QiushiAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
+    public QiushiAdapter(FragmentManager fm, Context context, List<String> textList) {
+        super(fm);
+        this.context = context;
+        this.textList = textList;
+    }
+
     @Override
     public Fragment getItem(int position) {
         return BlankFragment.newInstance(textList.get(position));

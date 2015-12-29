@@ -2,19 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="#acf">
+    android:background="@color/colorTabTitle">
 
     <ImageView
         android:id="@+id/image_header"
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@mipmap/review_pass"/>
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/text_header"
         android:layout_below="@id/image_header"
-        android:text="杨哥"
-        android:layout_alignLeft="@id/image_header"
+        android:text="杨 哥"
+        android:textSize="24sp"
+        android:textColor="@color/White"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </RelativeLayout>
