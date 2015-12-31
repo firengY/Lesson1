@@ -2,13 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.firengy.lesson1.fragments.BlankFragment">
+    tools:context="com.firengy.lesson1.fragments.QiuyouCircleFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/fragment_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="qiuyouCircle" />
 
 </FrameLayout>

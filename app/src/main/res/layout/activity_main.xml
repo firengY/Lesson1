@@ -1,44 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.firengy.lesson1.PagerEnabledSlidingPaneLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.firengy.lesson1.customview.PagerEnabledSlidingPaneLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.firengy.lesson1.MainActivity">
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/menu"
-        android:elevation="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start|left"
-        app:headerLayout="@layout/header_first_project"
-        app:menu="@menu/menu_first_project" />
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ddd"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
-        android:orientation="vertical">
-
-        <android.support.design.widget.TabLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabTextColor="#222"
-            app:tabSelectedTextColor="@color/colorTabTitle"
-            app:tabMode="fixed"
-            app:tabBackground="@color/White"
-            app:tabIndicatorColor="@color/colorTabTitle"
-            app:tabIndicatorHeight="4dp"
-            android:id="@+id/table_content"/>
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+        <android.support.design.widget.NavigationView
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|left"
+            app:elevation="5dp"
+            app:headerLayout="@layout/header_first_project"
+            app:menu="@menu/menu_first_project" />
     </LinearLayout>
 
-</com.firengy.lesson1.PagerEnabledSlidingPaneLayout>
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</com.firengy.lesson1.customview.PagerEnabledSlidingPaneLayout>

@@ -1,0 +1,16 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.firengy.lesson1.fragments.ZhuanXiangFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:layout_marginTop="5dp"
+        android:dividerHeight="5dp"
+        android:id="@+id/list_zhuanxiang"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         />
+
+</FrameLayout>

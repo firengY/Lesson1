@@ -23,22 +23,13 @@
             android:background="@mipmap/ic_mine_normal" />
     </LinearLayout>
 
-    <LinearLayout
+
+    <ListView
         android:layout_above="@id/linear_comment"
+        android:id="@+id/list_comment"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <include
-            android:id="@+id/layout_comment"
-            layout="@layout/item_list_zhuanxiang" />
-
-        <ListView
-            android:id="@+id/list_comment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layout_comment" />
-    </LinearLayout>
+        android:layout_height="wrap_content" />
 
 
 </RelativeLayout>

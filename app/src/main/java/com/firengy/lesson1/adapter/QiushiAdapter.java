@@ -1,11 +1,10 @@
 package com.firengy.lesson1.adapter;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.firengy.lesson1.fragments.BlankFragment;
+import com.firengy.lesson1.fragments.ZhuanXiangFragment;
 
 import java.util.List;
 
@@ -15,22 +14,23 @@ import java.util.List;
  * Email: 18811372352@163.com
  */
 public class QiushiAdapter extends FragmentPagerAdapter {
-    private Context context;
     private List<String> textList;
+    private List<String> typeList;
 
     public QiushiAdapter(FragmentManager fm) {
         super(fm);
     }
 
-    public QiushiAdapter(FragmentManager fm, Context context, List<String> textList) {
+    public QiushiAdapter(FragmentManager fm,List<String> textList,List<String> typeList) {
         super(fm);
-        this.context = context;
+
         this.textList = textList;
+        this.typeList = typeList;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return BlankFragment.newInstance(textList.get(position));
+        return ZhuanXiangFragment.newInstance(typeList.get(position));
     }
 
     @Override

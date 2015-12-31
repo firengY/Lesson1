@@ -1,4 +1,4 @@
-package com.firengy.lesson1;
+package com.firengy.lesson1.customview;
 
 import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
