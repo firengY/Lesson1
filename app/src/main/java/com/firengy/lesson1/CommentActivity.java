@@ -5,30 +5,35 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.AdapterView;
 
 import com.firengy.lesson1.adapter.CommentAdapter;
 import com.firengy.lesson1.adapter.ZhuanXiangAdapter;
 import com.firengy.lesson1.entity.CommentItem;
 import com.firengy.lesson1.entity.ZhuanXiangItem;
+import com.firengy.lesson1.tools.HttpUtils;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import retrofit.Call;
 import retrofit.Callback;
-import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class CommentActivity extends AppCompatActivity implements Callback<CommentItem> {
+public class CommentActivity extends AppCompatActivity implements Callback<CommentItem> ,PullToRefreshBase.OnRefreshListener {
 
     //private PullToZoomScrollViewEx scrollComment;
-    private ListView listComment;
+    private PullToRefreshListView listComment;
     private Call<CommentItem> call;
     private CommentAdapter adapter;
 
     private static final String TAG = "CommentActivity";
+    //private int currentCount = 0;
+    private int page = 1;
+    private int commentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +41,7 @@ public class CommentActivity extends AppCompatActivity implements Callback<Comme
         setContentView(R.layout.activity_comment);
 
         //scrollComment = (PullToZoomScrollViewEx) findViewById(R.id.scroll_comment);
-        listComment = (ListView) findViewById(R.id.list_comment);
+        listComment = (PullToRefreshListView) findViewById(R.id.list_comment);
 
         //获取从ZhuanxiangFragment传过来的Item数据
         Intent result = getIntent();
@@ -47,18 +52,15 @@ public class CommentActivity extends AppCompatActivity implements Callback<Comme
             //Toast.makeText(CommentActivity.this, item.toString(), Toast.LENGTH_SHORT).show();
         }
 
+        int totoalCount = item.getComments_count()+1;
+
         //获取Item的id，拼接comment接口
-        int commentId = item.getId();
+        commentId = item.getId();
 
         //Retrofit实现网络连接并获取数据
-        Retrofit build = new Retrofit.Builder()
-                .baseUrl("http://m2.qiushibaike.com")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        CommentService service = build.create(CommentService.class);
-        call = service.getCommentList(String.valueOf(commentId), 1);
-        call.enqueue(this);
+        HttpUtils.getCommentService()
+                .getCommentList(String.valueOf(commentId), page)
+                .enqueue(this);
 
 
         //获取ListView的headerView
@@ -70,20 +72,40 @@ public class CommentActivity extends AppCompatActivity implements Callback<Comme
 
         //构建ListView
 //        Toast.makeText(CommentActivity.this, headView.toString(), Toast.LENGTH_SHORT).show();
-        listComment.addHeaderView(headView);
+        listComment.getRefreshableView().addHeaderView(headView);
         adapter = new CommentAdapter(this);
 
         listComment.setAdapter(adapter);
+        listComment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(CommentActivity.this, "position = " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        listComment.setOnRefreshListener(this);
     }
 
     @Override
     public void onResponse(Response<CommentItem> response, Retrofit retrofit) {
         adapter.addAll(response.body().getItems());
+        //currentCount = adapter.getCount();
+        listComment.onRefreshComplete();
     }
 
     @Override
     public void onFailure(Throwable t) {
         t.printStackTrace();
         Log.d(TAG, "onFailure: " + t.toString());
+        listComment.setRefreshing(true);
+    }
+
+    @Override
+    public void onRefresh(PullToRefreshBase refreshView) {
+        //Toast.makeText(CommentActivity.this, "刷新", Toast.LENGTH_SHORT).show();
+        page++;
+        HttpUtils.getCommentService()
+                .getCommentList(String.valueOf(commentId), page)
+                .enqueue(this);
     }
 }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
     tools:context="com.firengy.lesson1.CommentActivity">
 
     <LinearLayout
@@ -10,26 +11,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@drawable/abc_ab_bottom_transparent_light_holo">
 
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@null"/>
 
         <Button
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@mipmap/ic_mine_normal" />
+            android:background="@mipmap/publish_send_disable" />
     </LinearLayout>
 
 
-    <ListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:layout_above="@id/linear_comment"
         android:id="@+id/list_comment"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        ptr:ptrMode="pullFromEnd"/>
 
 
 </RelativeLayout>

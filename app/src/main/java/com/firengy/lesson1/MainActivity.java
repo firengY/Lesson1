@@ -9,8 +9,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SlidingPaneLayout;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.firengy.lesson1.customview.PagerEnabledSlidingPaneLayout;
 import com.firengy.lesson1.fragments.QiushiFragment;
@@ -104,6 +106,7 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
         return true;
     }
 
+
     @Override
     public void onPanelSlide(View panel, float slideOffset) {
         ViewCompat.setPivotX(menu, 0);
@@ -120,5 +123,22 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
     @Override
     public void onPanelClosed(View panel) {
 
+    }
+
+    private long exitTime = 0;
+    //再按一次退出程序
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK&&event.getAction()==KeyEvent.ACTION_DOWN){
+            if (System.currentTimeMillis()-exitTime>2000){
+                Toast.makeText(MainActivity.this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            }else{
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
