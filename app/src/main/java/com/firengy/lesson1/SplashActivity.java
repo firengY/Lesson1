@@ -1,14 +1,14 @@
 package com.firengy.lesson1;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class SplashActivity extends AppCompatActivity implements Runnable{
+public class SplashActivity extends Activity implements Runnable{
 
     public static final int ACTION_START = 0;
     private ImageView splash1;

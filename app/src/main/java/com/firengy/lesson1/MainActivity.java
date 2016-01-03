@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SlidingPaneLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -21,25 +23,25 @@ import com.firengy.lesson1.fragments.QiuyouCircleFragment;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity implements NavigationView.OnNavigationItemSelectedListener, SlidingPaneLayout.PanelSlideListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SlidingPaneLayout.PanelSlideListener {
 
     private NavigationView menu;
     private PagerEnabledSlidingPaneLayout slidingPane;
-    public static int LAYOUT = R.layout.activity_main;
-
 
     private List<Fragment> mFragments;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(LAYOUT);
+        setContentView(R.layout.activity_main);
 
         mFragments = new LinkedList<Fragment>();
         menu = (NavigationView) findViewById(R.id.menu);
         slidingPane = (PagerEnabledSlidingPaneLayout) findViewById(R.id.drawer);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_main);
 
         fragmentManager = getSupportFragmentManager();
         Fragment fragment = null;
@@ -50,20 +52,27 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
 
         fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.add(R.id.fragment_container,mFragments.get(0));
-        fragmentTransaction.add(R.id.fragment_container,mFragments.get(1));
+        fragmentTransaction.add(R.id.fragment_container, mFragments.get(0));
+        fragmentTransaction.add(R.id.fragment_container, mFragments.get(1));
 
 
         fragmentTransaction
                 .hide(mFragments.get(1))
-                //.hide(mFragments.get(2))
-                //.hide(mFragments.get(3))
+                        //.hide(mFragments.get(2))
+                        //.hide(mFragments.get(3))
                 .commit();
-
 
         slidingPane.setPanelSlideListener(this);
         menu.setNavigationItemSelectedListener(this);
 
+        setSupportActionBar(toolbar);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar_main,menu);
+        return true;
     }
 
     //menu
@@ -126,14 +135,15 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
     }
 
     private long exitTime = 0;
+
     //再按一次退出程序
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK&&event.getAction()==KeyEvent.ACTION_DOWN){
-            if (System.currentTimeMillis()-exitTime>2000){
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (System.currentTimeMillis() - exitTime > 2000) {
                 Toast.makeText(MainActivity.this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
-            }else{
+            } else {
                 finish();
                 System.exit(0);
             }

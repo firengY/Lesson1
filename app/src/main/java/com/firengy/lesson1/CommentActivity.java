@@ -1,8 +1,11 @@
 package com.firengy.lesson1;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,16 +21,15 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import java.util.LinkedList;
 import java.util.List;
 
-import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class CommentActivity extends AppCompatActivity implements Callback<CommentItem> ,PullToRefreshBase.OnRefreshListener {
+public class CommentActivity extends AppCompatActivity implements Callback<CommentItem>, PullToRefreshBase.OnRefreshListener {
 
     //private PullToZoomScrollViewEx scrollComment;
     private PullToRefreshListView listComment;
-    private Call<CommentItem> call;
+    //private Call<CommentItem> call;
     private CommentAdapter adapter;
 
     private static final String TAG = "CommentActivity";
@@ -43,19 +45,30 @@ public class CommentActivity extends AppCompatActivity implements Callback<Comme
         //scrollComment = (PullToZoomScrollViewEx) findViewById(R.id.scroll_comment);
         listComment = (PullToRefreshListView) findViewById(R.id.list_comment);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_comment);
+            setSupportActionBar(toolbar);
+        }
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setHomeButtonEnabled(true);
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         //获取从ZhuanxiangFragment传过来的Item数据
         Intent result = getIntent();
         ZhuanXiangItem.ItemsEntity item = null;
         if (result != null) {
             Bundle bundle = result.getExtras();
-            item = (ZhuanXiangItem.ItemsEntity)bundle.getSerializable("item");
+            item = (ZhuanXiangItem.ItemsEntity) bundle.getSerializable("item");
             //Toast.makeText(CommentActivity.this, item.toString(), Toast.LENGTH_SHORT).show();
+
+            if (item != null) {
+                //获取Item的id，拼接comment接口
+                commentId = item.getId();
+            }
         }
 
-        int totoalCount = item.getComments_count()+1;
-
-        //获取Item的id，拼接comment接口
-        commentId = item.getId();
 
         //Retrofit实现网络连接并获取数据
         HttpUtils.getCommentService()

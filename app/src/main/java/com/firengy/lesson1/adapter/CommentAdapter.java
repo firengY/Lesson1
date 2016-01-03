@@ -87,6 +87,7 @@ public class CommentAdapter extends BaseAdapter {
             Picasso.with(context)
                     .load(getIconURL(item.getUser().getId(),
                             iconStr))
+                    .placeholder(R.mipmap.found_item_avatar)
                     .transform(new CircleTransformation())
                     .resize(80, 80)
                     .into(holder.userIcon);
@@ -96,6 +97,7 @@ public class CommentAdapter extends BaseAdapter {
             holder.userName.setTextColor(Color.rgb(200, 200, 200));
             Picasso.with(context)
                     .load(R.mipmap.default_anonymous_users_avatar)
+                    .placeholder(R.mipmap.found_item_avatar)
                     .transform(new CircleTransformation())
                     .resize(80,80)
                     .into(holder.userIcon);
